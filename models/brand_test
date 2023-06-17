@@ -1,0 +1,222 @@
+# 1=>>>>>>>>>>>>>>>>>>>.
+
+# class Brand(models.Model):
+#     _inherit = "product.template"
+#     custom_value = fields.One2many(
+#         "brand.form", "brand_inherit", string="Brand", copy=True
+#     )
+#     brand_name = fields.Char(string="Brand Name")
+
+
+#     @api.constrains("custom_value")
+#     def add_brand(self):
+#         if self.custom_value:
+#             result = self.env["product.attribute"].search([("name", "=", "brand")])
+#             print(
+#                 "result is =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+#                 result,
+#             )
+#             if result:
+#                 attr = self.attribute_line_ids.search(
+#                     [("attribute_id", "=", result.id)]
+#                 )
+#                 print(
+#                     "attr is =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+#                     attr,
+#                 )
+#                 if not attr:
+#                     val1 = self.env["product.attribute.value"].create(
+#                         {"name": "brand1", "attribute_id": attr.id}
+#                     )
+#                     self.attribute_line_ids.create(
+#                         {
+#                             "attribute_id": result.id,
+#                             "product_tmpl_id": self.id,
+#                             "value_ids": [val1.id],
+#                         }
+#                     )
+
+
+# 22222222222222
+
+# class Brand(models.Model):
+#     _inherit = "product.template"
+#     custom_value = fields.One2many(
+#         "brand.form", "brand_inherit", string="Brand", copy=True
+#     )
+#     brand_name = fields.Char(string="Brand Name")
+
+#     @api.constrains("custom_value")
+#     def add_brand(self):
+#         if self.custom_value:
+#             result = self.env["product.attribute"].search([("name", "=", "brand")])
+#             if not result:
+#                 brand_attribute = self.env["product.attribute"].create(
+#                     {"name": "brand"}
+#                 )
+#                 for brand_form in self.custom_value:
+#                     val = self.env["product.attribute.value"].create(
+#                         {
+#                             "name": brand_form.name,
+#                             "attribute_id": brand_attribute.id,
+#                         }
+#                     )
+#                     self.attribute_line_ids.create(
+#                         {
+#                             "attribute_id": brand_attribute.id,
+#                             "product_tmpl_id": self.id,
+#                             "value_ids": [(4, val.id)],
+#                         }
+#                     )
+#             else:
+#                 attr = self.attribute_line_ids.search(
+#                     [("attribute_id", "=", result.id)]
+#                 )
+#                 if not attr:
+#                     for brand_form in self.custom_value:
+#                         val = self.env["product.attribute.value"].create(
+#                             {
+#                                 "name": brand_form.name,
+#                                 "attribute_id": result.id,
+#                             }
+#                         )
+#                         self.attribute_line_ids.create(
+#                             {
+#                                 "attribute_id": result.id,
+#                                 "product_tmpl_id": self.id,
+#                                 "value_ids": [(4, val.id)],
+#                             }
+#                         )
+
+
+# 3##############
+
+# class Brand(models.Model):
+#     _inherit = "product.template"
+#     custom_value = fields.One2many(
+#         "brand.form", "brand_inherit", string="Brand", copy=True
+#     )
+#     brand_name = fields.Char(string="Brand Name")
+
+#     @api.constrains("custom_value")
+#     def add_brand(self):
+#         if self.custom_value:
+#             result = self.env["product.attribute"].search([("name", "=", "brand")])
+#             if not result:
+#                 brand_attribute = self.env["product.attribute"].create(
+#                     {"name": "brand"}
+#                 )
+#             else:
+#                 brand_attribute = result[0]  # Retrieve the existing attribute
+
+#             existing_values = brand_attribute.value_ids.mapped(
+#                 "name"
+#             )  # Retrieve existing attribute values
+#             for brand_form in self.custom_value:
+#                 if brand_form.name not in existing_values:
+#                     val = self.env["product.attribute.value"].create(
+#                         {
+#                             "name": brand_form.name,
+#                             "attribute_id": brand_attribute.id,
+#                         }
+#                     )
+#                     self.attribute_line_ids.create(
+#                         {
+#                             "attribute_id": brand_attribute.id,
+#                             "product_tmpl_id": self.id,
+#                             "value_ids": [(4, val.id)],
+#                         }
+#                     )
+#                     variant = self.env["product.template.attribute.value"].create(
+#                         {
+#                             "product_tmpl_id": self.id,
+#                             # "product_template_variant_value_ids": [(6, 0, [val.id])],
+#                             "lst_price": 5,
+#                         }
+#                     )
+# val2 = self.env["product.template.attribute.value"].create(
+#     {
+#         "name": self.id,
+#         "product_template_variant_value_ids": [(4, variant.id)],
+#         "lst_price": 5,
+#     }
+# )
+
+#workingggggggggggggg
+# class Brand(models.Model):
+#     _inherit = "product.template"
+#     custom_value = fields.One2many(
+#         "brand.form", "brand_inherit", string="Brand", copy=True
+#     )
+#     brand_name = fields.Char(string="Brand Name")
+#
+#     @api.constrains("custom_value")
+#     def add_brand(self):
+#         if self.custom_value:
+#             result = self.env["product.attribute"].search([("name", "=", "brand")])
+#             if not result:
+#                 brand_attribute = self.env["product.attribute"].create(
+#                     {"name": "brand"}
+#                 )
+#             else:
+#                 brand_attribute = result[0]  # Retrieve the existing attribute
+#
+#             existing_values = brand_attribute.value_ids.mapped("name")  # Retrieve existing attribute values
+#             for brand_form in self.custom_value:
+#                 if brand_form.name not in existing_values:
+#                     val = self.env["product.attribute.value"].create(
+#                         {
+#                             "name": brand_form.name,
+#                             "attribute_id": brand_attribute.id,
+#                         }
+#                     )
+#                     self.attribute_line_ids.create(
+#                         {
+#                             "attribute_id": brand_attribute.id,
+#                             "product_tmpl_id": self.id,
+#                             "value_ids": [(4, val.id)],
+#                         }
+#                     )
+#                     variant = self.env["product.product"].create(
+#                         {
+#                             "product_tmpl_id": self.id,
+#                             "attribute_value_ids": [(4, val.id)],
+#                         }
+                    )
+
+from odoo.fields import Command
+
+
+#
+# class Brand(models.Model):
+#     _inherit = "product.template"
+#     custom_value = fields.One2many(
+#         "brand.form", "brand_inherit", string="Brand", copy=True
+#     )
+#     brand_name = fields.Char(string="Brand Name")
+#
+#     @api.onchange("custom_value")
+#     def add_brand(self):
+#         if self.custom_value:
+#             for brand_form in self.custom_value.filtered(lambda b: not b.is_added):
+#                 result = self.env["product.attribute"].search([("name", "=", "brand")])
+#                 if not result:
+#                     brand_attribute = self.env["product.attribute"].create(
+#                         {"name": "brand"}
+#                     )
+#                     brand_value = self.env["product.attribute.value"].create(
+#                         {
+#                             "name": brand_form.name,
+#                             "attribute_id": brand_attribute.id,
+#                         }
+#                     )
+#                     self.attribute_line_ids = [
+#                         Command.create(
+#                             {
+#                                 "attribute_id": brand_attribute.id,
+#                                 "value_ids": [Command.link(brand_value.id)],
+#                             }
+#                         )
+#                     ]
+#                     brand_form.is_added = True
+#                     self.attribute_line_ids._update_product_template_attribute_values()

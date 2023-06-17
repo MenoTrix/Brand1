@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="product_brand_inherit" model="ir.ui.view">
+            <field name="name">Brand</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Brand">
+                        <group>
+                            <field name="custom_value">
+                                <tree editable="bottom">
+                                <field name="name"/>
+                                    <field name="price"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+<!--        <record id="brand_form__view_tree" model="ir.ui.view">-->
+<!--            <field name="name">brand_form__view_tree</field>-->
+<!--            <field name="model">brand.form</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="brand_form__tree">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="price"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>
